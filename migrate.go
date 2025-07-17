@@ -746,6 +746,9 @@ func (m *Migrate) runMigrations(ret <-chan interface{}) error {
 				if err := m.databaseDrv.Run(migr.BufferedBody); err != nil {
 					return err
 				}
+				interval := time.Second * 10
+				m.logPrintf("Sleeping for %v\n", interval)
+				time.Sleep(interval)
 			}
 
 			// set clean state
